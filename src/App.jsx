@@ -11,29 +11,34 @@ import Portfolio from './components/Portfolio';
 import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
 
+alert("Agustina, puerca, cochina");
+
 function App() {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchServices = async () => {
-      const servicesColection = collection(db, 'services');
-      const servicesSnapshot = await getDocs(servicesColection);
-      const servicesList = servicesSnapshot.docs.map(doc => ({
-        id: doc.id,
-        ...doc.data()
-      }));
-      setServices(servicesList);
-      setLoading(false);
+      try {
+        const servicesColection = collection(db, 'services');
+        const servicesSnapshot = await getDocs(servicesColection);
+        const servicesList = servicesSnapshot.docs.map(doc => ({
+          id: doc.id,
+          ...doc.data()
+        }));
+        setServices(servicesList);
+        console.log("Servicios obtenidos:", servicesList);
+      } catch (error) {
+        console.error("Error al obtener los servicios:", error);
+      } finally {
+        setLoading(false);
+      }
+
     };
 
-    fetchServices().catch(error => {
-      console.error("Error fetching services: ", error);
-      setLoading(false);
-    });
-
+    fetchServices();
   }, []);
-  
+
   return (
     <div className="antialiased font-sans bg-gray-50 text-gray-900 leading-normal tracking-wide">
       <Header />
@@ -42,7 +47,7 @@ function App() {
         {loading ? (
           <div className="text-center py-8">Loading services...</div>
         ) : (
-          <Services services={services} />
+          <Services servicesData={services} />
         )}
         <Portfolio />
         <ContactForm />
