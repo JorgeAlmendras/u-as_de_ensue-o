@@ -1,6 +1,6 @@
 import ServiceCard from './ServiceCard';
 
-const Services = ( { servicesData }) => {
+const Services = ({ servicesData, isAdmin, onEdit, onDelete }) => {
   /*
   const servicesData = [
     { title: "Semipermanente", description: "Ideal para un look duradero y brillante de hasta 21 días.", price: "Desde $XXXX", image: "https://placehold.co/400x250/C1C9E0/64748B?text=Semipermanente" },
@@ -17,7 +17,13 @@ const Services = ( { servicesData }) => {
         <h2 className="text-4xl font-bold text-center text-gray-800 mb-12 md:mb-16">Nuestros Servicios a Domicilio</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8">
           {servicesData && Array.isArray(servicesData) && servicesData.map((service, index) => (
-            <ServiceCard key={index} service={service} />
+            <ServiceCard
+              key={index}
+              service={service}
+              isAdmin={isAdmin}
+              onEdit={onEdit}
+              onDelete={onDelete}
+            />
           ))}
         </div>
       </div>
