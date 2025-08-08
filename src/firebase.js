@@ -1,0 +1,21 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+import { getAnalytics } from "firebase/analytics";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+// For Firebase JS SDK v7.20.0 and later, measurementId is optional
+const firebaseConfig = {
+  apiKey: "AIzaSyCIprGZUqrALSI86WmJWulayZVuc8I9X98",
+  authDomain: "dream-nails-37133.firebaseapp.com",
+  projectId: "dream-nails-37133",
+  storageBucket: "dream-nails-37133.firebasestorage.app",
+  messagingSenderId: "288364851659",
+  appId: "1:288364851659:web:5851d9d55c03a5f934c64e",
+  measurementId: "G-1TXJ071HZS"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
