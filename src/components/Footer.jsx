@@ -4,3 +4,5 @@ const Footer = () => (
     <p className="text-sm mt-2">Diseñado y desarrollado para la Langonstina.</p>
   </footer>
 );
+
+export default Footer;

@@ -1,3 +1,5 @@
+import ServiceCard from './ServiceCard';
+
 const Services = () => {
   const servicesData = [
     { title: "Semipermanente", description: "Ideal para un look duradero y brillante de hasta 21 días.", price: "Desde $XXXX", image: "https://placehold.co/400x250/C1C9E0/64748B?text=Semipermanente" },
