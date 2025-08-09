@@ -1,6 +1,7 @@
 import { addDoc, collection, deleteDoc, getDocs, updateDoc } from "firebase/firestore";
 import { auth, db } from "../firebase";
 import { signOut } from "firebase/auth";
+import Services from "./Services";
 
 const AdminPanel = ({ services, setServices }) => {
     const [isAdding, setIsAdding] = useState(false);
@@ -98,6 +99,36 @@ const AdminPanel = ({ services, setServices }) => {
     }, [editingService]);
 
     return (
-        <></>
+        <div className="bg-gray-50 min-h-screen p-8">
+            <div className="flex justify-between items-center mb-8">
+                <h1 className="text-3xl font-bold text-gray-800">Panel de Administración</h1>
+                <button onClick={handleLogout} className="bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-4 rounded-full transition-colors">
+                    Cerrar Sesión
+                </button>
+            </div>
+
+            { ismessage && (
+                <div className="bg-green-100 text-green-800 p-4 rounded-lg mb-6">
+                    {ismessage}
+                </div>
+            )}
+
+            {/* Formulario para agregar/editar */}
+            <div className="bg-white p-6 rounded-lg shadow-md mb-8">
+                
+            </div>
+
+            {/* Listado de servicios */}
+            <Services 
+            servicesData={services}
+            isAdmin={true}
+            onEdit={(services) => {
+                window.scrollTo({ top:0, behavior: 'smooth' });
+                setEditingService(services);
+            }}
+            onDelete={handleDeleteService}
+            />
+
+        </div>
     )
 }
