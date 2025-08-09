@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { collection, getDocs } from 'firebase/firestore';
-import { db } from './firebase'; // Import the Firestore instance
+import { auth, db } from './firebase'; // Import the Firestore instance
 
 import './App.css';
 
