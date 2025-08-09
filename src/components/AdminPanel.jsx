@@ -1,5 +1,6 @@
-import { addDoc, collection, getDocs, updateDoc } from "firebase/firestore";
-import { db } from "../firebase";
+import { addDoc, collection, deleteDoc, getDocs, updateDoc } from "firebase/firestore";
+import { auth, db } from "../firebase";
+import { signOut } from "firebase/auth";
 
 const AdminPanel = ({ services, setServices }) => {
     const [isAdding, setIsAdding] = useState(false);
@@ -58,7 +59,45 @@ const AdminPanel = ({ services, setServices }) => {
         }
     };
 
-    const handleDeleteService = async (id) => {};
+    const handleDeleteService = async (id) => {
+        if (window.confirm("¿Estás seguro de que quieres eliminar este servicio?")) {
+            try {
+                // Aquí iría la lógica para eliminar el servicio de Firestore
+                const serviceRef = doc(db, 'services', id);
+                await deleteDoc(serviceRef);
+                setIsMessage("Servicio eliminado exitosamente");
 
-    const handleLogout = async () => {};
+                fetchServices(); // Refrescar la lista de servicios
+
+            } catch (err) {
+                console.error("Error al eliminar el servicio:", err);
+                setIsMessage("Error al eliminar el servicio. Inténtalo de nuevo.");
+            }
+        }
+    };
+
+    const handleLogout = async () => {
+        try {
+            // Aquí iría la lógica para cerrar sesión
+            await signOut(auth);
+            console.log("Sesión cerrada exitosamente");
+        } catch (err) {
+            console.error("Error al cerrar sesión:", err);
+        }
+    };
+
+    useEffect(() => {
+        if(editingService) {
+            setNewService({
+                title: editingService.title,
+                description: editingService.description,
+                price: editingService.price,
+                image: editingService.image
+            });
+        }
+    }, [editingService]);
+
+    return (
+        <></>
+    )
 }
