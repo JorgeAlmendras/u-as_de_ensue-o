@@ -10,37 +10,63 @@ import Services from './components/Services';
 import Portfolio from './components/Portfolio';
 import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
+import { onAuthStateChanged } from 'firebase/auth';
 
 alert("Agustina, puerca, cochina");
 
 function App() {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [user, setUser] = useState(null);
+
+  const fetchServices = async () => {
+    try {
+      const servicesColection = collection(db, 'services');
+      const servicesSnapshot = await getDocs(servicesColection);
+      const servicesList = servicesSnapshot.docs.map(doc => ({
+        id: doc.id,
+        ...doc.data()
+      }));
+      setServices(servicesList);
+      console.log("Servicios obtenidos:", servicesList);
+    } catch (error) {
+      console.error("Error al obtener los servicios:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
 
   useEffect(() => {
-    const fetchServices = async () => {
-      try {
-        const servicesColection = collection(db, 'services');
-        const servicesSnapshot = await getDocs(servicesColection);
-        const servicesList = servicesSnapshot.docs.map(doc => ({
-          id: doc.id,
-          ...doc.data()
-        }));
-        setServices(servicesList);
-        console.log("Servicios obtenidos:", servicesList);
-      } catch (error) {
-        console.error("Error al obtener los servicios:", error);
-      } finally {
-        setLoading(false);
-      }
+    const unsubscribe = onAuthStateChanged(auth, (currentUser) => {
+      setUser(currentUser);
+      fetchServices();
+      setLoading(false);
+    })
 
-    };
-
-    fetchServices();
+    return () => unsubscribe();
   }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center text-xl text-gray-500">
+        Cargando...
+      </div>
+    )
+  }
+
+  if (user) {
+    return (
+      <AdminPanel services={services} setServices={setServices} />
+    )
+  }
 
   return (
     <div className="antialiased font-sans bg-gray-50 text-gray-900 leading-normal tracking-wide">
+      <div className="relative">
+        <a href="#admin" className="absolute top-4 right-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full transition-colors">
+          Admin
+        </a>
+      </div>
       <Header />
       <main>
         <Hero />
