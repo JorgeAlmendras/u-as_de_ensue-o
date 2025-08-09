@@ -12,7 +12,6 @@ import ContactForm from './components/ContactForm';
 import Footer from './components/Footer';
 import { onAuthStateChanged } from 'firebase/auth';
 
-alert("Agustina, puerca, cochina");
 
 function App() {
   const [services, setServices] = useState([]);

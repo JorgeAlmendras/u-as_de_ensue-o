@@ -35,19 +35,39 @@ const Login = ({ onLoginSuccess }) => {
     return (
         <div className="min-h-screen flex items-center justify-conter bg-gray-100">
             <div className="bg-white p-8 rounded-lg shadow-x1  w-fullmax-w-md">
-                <h2 className="text-3x1 font-bold text-center">Iniciar Sesión</h2>
+                <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Iniciar Sesión</h2>
                 <form onSubmit={handleLogin}>
-                    <div className="">
-                        <label htmlFor="" className=""></label>
-                        <input type="email" />
+                    <div className="mb-4">
+                        <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2"></label>
+                        <input
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                        id="email"
+                        type="email"
+                        placeholder="Correo electrónico"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
+                        required
+                        />
                     </div>
-                    <div className="">
-                        <label htmlFor="">Contraseña</label>
-                        <input type="password" />
+                    <div className="mb-6">
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">Contraseña</label>
+                        <input
+                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                        id="password"
+                        type="password"
+                        placeholder="Contraseña"
+                        value={password}
+                        onChange={(e) => setpassword(e.target.value)}
+                        required
+                        />
                     </div>
                     {error && <p className="text-red-500 text-xs italic mt-4">{error}</p>}
-                    <div className="">
-                        <button>
+                    <div className="flex items-center justify-between">
+                        <button
+                        className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full focus:outline-none focus:shadow-outline transition-colors w-full"
+                        type="submit"
+                        disabled={isSigningIn}
+                        >
                             {isSigningIn ? 'Iniciando sesión...' : 'Ingresar'}
                         </button>
                     </div>
