@@ -1,3 +1,4 @@
+
 const ServiceCard = ({ service, isAdmin, onEdit, onDelete }) => (
   <div className="bg-gray-100 rounded-2xl shadow-xl overflow-hidden transform hover:scale-105 transition-transform duration-300">
     <img src={service.image} alt={service.title} className="w-full h-48 object-cover" />

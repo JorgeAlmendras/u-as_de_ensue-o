@@ -115,16 +115,86 @@ const AdminPanel = ({ services, setServices }) => {
 
             {/* Formulario para agregar/editar */}
             <div className="bg-white p-6 rounded-lg shadow-md mb-8">
-                
+                <h2 className="text-2xl font-bold text-gray-800 mb-4">
+                    {editingService ? 'Editar Servicio' : 'Agregar nuevo servivio'}
+                </h2>
+
+                <form action="" onSubmit={ editingService ? handleUpdateService : handleAddService }>
+                    <div className="mb-4">
+                        <label htmlFor="" className="block text-gray-700 text-sm font-bold mb-2">Titulo</label>
+                        <input 
+                        type="text"
+                        className="w-full px-3 py-2 border rounded-lg"
+                        onChange={(e) => setNewService({...newService, title: e.target.value})}
+                        required
+                         />
+                    </div>
+
+                    <div className="mb-4">
+                        <label htmlFor="" className="block text-gray-700 text-sm font-bold mb-2">Descripción</label>
+                        <textarea
+                        className="w-full px-3 py-2 border rounded-lg"
+                        value={newService.description}
+                        onChange={ (e) => setNewService({ ...newService, description: e.target.value})}
+                        required
+                        ></textarea>
+                    </div>
+
+                    <div className="mb-4">
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="">Precio</label>
+                        <input 
+                        type="number"
+                        className="w-full px-3 py-2 border rounded-lg"
+                        value={newService.price}
+                        onChange={ (e) => setNewService({ ...newService, price: e.target.value })}
+                        required
+                        />
+                    </div>
+
+                    <div className="mb-4">
+                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="">URL de imagen</label>
+                        <input type="text"
+                        className="w-full px-3 py-2 border rounded-lg"
+                        value={ newService.image }
+                        onChange={ (e) => setServices({ ...newService, image: e.target.value })}
+                        required
+                         />
+                    </div>
+                    <div className="flex space-x-4">
+                        <button 
+                        type="submit"
+                        className="bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full transition-colors"
+                        >
+                            { editingService ? 'Guardar Cambios' : 'Agregar Servicio'}
+                        </button>
+                        { editingService && (
+                            <button 
+                            type="button"
+                            onClick={ () => {
+                                setEditingService = null;
+                                setNewService({
+                                    title:'',
+                                    description: '',
+                                    price: '',
+                                    image: ''
+                                });
+                            }}
+                            className="bg-gray-400 hover:bg-gray-500 text-white font-bold py-2 px-4 rounded-full transition-colors"
+                            >
+                                Cancelar
+                            </button>
+                        )}
+                    </div>
+                </form>
             </div>
 
             {/* Listado de servicios */}
             <Services 
             servicesData={services}
             isAdmin={true}
-            onEdit={(services) => {
+            onEdit={(service) => {
                 window.scrollTo({ top:0, behavior: 'smooth' });
-                setEditingService(services);
+                setEditingService(service);
             }}
             onDelete={handleDeleteService}
             />
@@ -132,3 +202,5 @@ const AdminPanel = ({ services, setServices }) => {
         </div>
     )
 }
+
+export default AdminPanel

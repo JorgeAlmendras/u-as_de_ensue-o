@@ -33,7 +33,7 @@ const Login = ({ onLoginSuccess }) => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-conter bg-gray-100">
+        <div className="min-h-screen flex items-center justify-conter bg-gray-100 relative">
             <div className="bg-white p-8 rounded-lg shadow-x1  w-fullmax-w-md">
                 <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Iniciar Sesión</h2>
                 <form onSubmit={handleLogin}>
@@ -76,3 +76,5 @@ const Login = ({ onLoginSuccess }) => {
         </div>
     )
 }
+
+export default Login
