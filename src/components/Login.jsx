@@ -33,17 +33,18 @@ const Login = ({ onLoginSuccess }) => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-conter bg-gray-100 relative">
+        <div className="min-h-screen flex items-center justify-center bg-gray-100">
             <div className="bg-white p-8 rounded-lg shadow-x1  w-fullmax-w-md">
                 <h2 className="text-3xl font-bold text-center text-gray-800 mb-6">Iniciar Sesión</h2>
+                
                 <form onSubmit={handleLogin}>
                     <div className="mb-4">
-                        <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2"></label>
+                        <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Correo Electronico</label>
                         <input
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="email"
                         type="email"
-                        placeholder="Correo electrónico"
+                        placeholder="ejemplo@gmail.com"
                         value={email}
                         onChange={(e) => setEmail(e.target.value)}
                         required

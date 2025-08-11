@@ -5,6 +5,7 @@ import { auth, db } from './firebase'; // Import the Firestore instance
 import './App.css';
 
 import Header from './components/Header';
+import Login from './components/Login';
 import Hero from './components/Hero';
 import Services from './components/Services';
 import Portfolio from './components/Portfolio';
@@ -17,7 +18,7 @@ function App() {
   const [services, setServices] = useState([]);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [showAdmin, setShowAdmin] = useState(false);
 
   const fetchServices = async () => {
     try {
@@ -62,18 +63,42 @@ function App() {
 
   return (
     <div className="antialiased font-sans bg-gray-50 text-gray-900 leading-normal tracking-wide">
-      <Header />
-      <main>
-        <Hero />
-        {loading ? (
-          <div className="text-center py-8">Loading services...</div>
-        ) : (
-          <Services servicesData={services} isAdmin={true}/>
-        )}
-        <Portfolio />
-        <ContactForm />
-      </main>
-      <Footer />
+      {showAdmin ? (
+        <>
+        <div className='relative'>
+          <button
+              onClick={() => setShowAdmin(false)}
+              className="absolute top-20 right-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full transition-colors"
+            >x</button>
+        </div>
+          
+          <Login onLoginSuccess={() => setShowAdmin(false)} />
+        </>
+        
+      ) : (
+        <>
+          <div className="relative">
+            <button
+              onClick={() => setShowAdmin(true)}
+              className="absolute top-20 right-4 bg-indigo-600 hover:bg-indigo-700 text-white font-bold py-2 px-4 rounded-full transition-colors"
+            >
+              Admin
+            </button>
+          </div>
+          <Header />
+          <main>
+            <Hero />
+            <Services 
+            servicesData={services}
+            isAdmin={false}
+            onEdit={null}
+            onDelete={null} />
+            <Portfolio />
+            <ContactForm />
+          </main>
+          <Footer />
+        </>
+      )}
     </div>
   )
 }
