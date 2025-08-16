@@ -3,19 +3,24 @@ import { initializeApp } from "firebase/app";
 import { getAnalytics } from "firebase/analytics";
 import { getFirestore } from "firebase/firestore";
 import { getAuth } from "firebase/auth";
+
+const key = import.meta.env;
+
+// Load environment variables from .env file
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+// Load environment variables from .env file
 const firebaseConfig = {
-  apiKey: process.env.VITE_FIREBASE_API_KEY,
-  authDomain: process.env.VITE_FIREBASE_AUTH_DOMAIN,
-  projectId: process.env.VITE_FIREBASE_PROYECT_ID,
-  storageBucket: process.env.VITE_FIREBASE_STORAGE_BUCKET,
-  messagingSenderId: process.env.VITE_FIREBASE_MESSAGING_SENDER_ID,
-  appId: process.env.VITE_FIREBASE_APP_ID,
-  measurementId: process.env.VITE_FIREBASE_MEASUREMENT_ID
+  apiKey: key.VITE_FIREBASE_API_KEY,
+  authDomain: key.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: key.VITE_FIREBASE_PROYECT_ID,
+  storageBucket: key.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: key.VITE_FIREBASE_MESSAGING_SENDER_ID,
+  appId: key.VITE_FIREBASE_APP_ID,
+  measurementId: key.VITE_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase
