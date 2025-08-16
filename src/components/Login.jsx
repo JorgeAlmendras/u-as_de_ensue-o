@@ -39,7 +39,7 @@ const Login = ({ onLoginSuccess }) => {
                 
                 <form onSubmit={handleLogin}>
                     <div className="mb-4">
-                        <label htmlFor="email" className="block text-gray-700 text-sm font-bold mb-2">Correo Electronico</label>
+                        <label htmlFor="email" className="block text-gray-700 text-lg font-bold mb-2">Correo Electronico</label>
                         <input
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                         id="email"
@@ -51,7 +51,7 @@ const Login = ({ onLoginSuccess }) => {
                         />
                     </div>
                     <div className="mb-6">
-                        <label className="block text-gray-700 text-sm font-bold mb-2" htmlFor="password">Contraseña</label>
+                        <label className="block text-gray-700 text-lg font-bold mb-2" htmlFor="password">Contraseña</label>
                         <input
                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                         id="password"
